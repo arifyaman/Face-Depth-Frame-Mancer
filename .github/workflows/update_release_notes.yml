@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: ["master"]
+  pull_request:
+    branches: ["master"]
+  workflow_dispatch:
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Step 2: Find the latest version file (excluding README.md) and replace README.md contents with it
+      - name: Update README.md with release notes
+        id: update_readme  # Use an ID to access output in next step
+        run: |
+          latest_version_file=$(ls -v *.md | grep -v -E "README.md|ManualInstallationGuide.md" | tail -n 1)
+          release_notes=$(cat "$latest_version_file")
+          printf "%s" "$release_notes" > README.md  # Overwrite README.md
+          echo "latest_version_file=$latest_version_file" >> $GITHUB_ENV  # Save as env variable
+
+      # Step 3: Commit and push the changes if there are any
+      - name: Commit and push changes if README.md is updated
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add README.md
+          
+          # Check if there are changes to commit
+          if ! git diff --cached --quiet; then
+            git commit -m "Update README with release notes from $latest_version_file"
+            git push https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          else
+            echo "No changes to commit."
+          fi
+        env:
+          latest_version_file: ${{ env.latest_version_file }}  # Use saved environment variable
