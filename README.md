@@ -20,9 +20,20 @@
    - For full functionality, it’s recommended to also enable the **Epic Games MetaHuman Plugin**.
         ![Extract Frames](images/11.png)
 
-4. Restart Unreal Engine if prompted.
-   - **Note**: When opening the project for the first time, the required Python packages will be installed, which may take some time. Please be patient.
+4. **Restart Unreal Engine if prompted.**
+
+   > **Note:** When opening the project for the first time, Unreal Engine will automatically install the required Python packages, which may take some time. Please be patient during this process.
+
+   The plugin depends on the following Python packages, which Unreal Engine will install in your project’s `Intermediate` folder:
+
    ![Extract Frames](images/1.png)
+   - **opencv-python**: 4.10.0.84
+   - **mediapipe**: 0.10.18
+   - **trimesh**: 4.5.2
+   - **matplotlib**: 3.9.2
+   - **openexr**: 3.3.1
+   - **imageio-ffmpeg**: 0.5.1
+
 
 
 ## Usage
