@@ -1,8 +1,12 @@
 # Face Depth Frame Mancer
 
-## Version 2025.1.0
+## Version 2025.1.1
 
 **Face Depth Frame Mancer** is an Unreal Engine plugin that generates **face depth frames** from video files **without the need for a depth camera**. It first extracts **image frames** and **audio**, **creates face depth frames**, **creates capture data footage** and then you can use it to create **high-quality MetaHuman performances**, elevating your virtual characters and animation workflows.
+
+### What's New in 2025.1.1
+- **Bug Fixes**: Fixed an issue with frame extraction for videos with frame rates below 30fps.
+- **Documentation Enhancements**: Included guidelines for recommended video specifications.
 
 ## Features
 
@@ -45,6 +49,10 @@
 
 1. **Drag and Drop a Video into Content Browser**
    Place your video file in the Unreal Engine Content Browser, which will automatically create a `FileMediaSource` asset.
+
+   **Recommended Video Settings**:  
+   - **Aspect Ratio**: 9:16  
+   - **Frame Rate**: 30 fps or higher 
 
    ![Extract Frames](images/a.png)
 
