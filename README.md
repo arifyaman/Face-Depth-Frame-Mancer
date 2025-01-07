@@ -1,12 +1,23 @@
 # Face Depth Frame Mancer
 
-## Version 2025.1.1
+## Version 2025.1.7
 
 **Face Depth Frame Mancer** is an Unreal Engine plugin that generates **face depth frames** from video files **without the need for a depth camera**. It first extracts **image frames** and **audio**, **creates face depth frames**, **creates capture data footage** and then you can use it to create **high-quality MetaHuman performances**, elevating your virtual characters and animation workflows.
 
-### What's New in 2025.1.1
-- **Bug Fixes**: Fixed an issue with frame extraction for videos with frame rates below 30fps.
-- **Documentation Enhancements**: Included guidelines for recommended video specifications.
+### What's New in 2025.1.7
+
+- **Refactored Frame Extraction & Depth Frame Generation**:  
+  - **No More Editor Blocking!** Frame extraction now runs seamlessly without interrupting the editor workflow.  
+  - **Enhanced Performance with ffmpeg**: Frame extraction has been replaced with ffmpeg for faster processing and accurate frame rate handling. Videos with frame rates below 30fps are now supported natively.  
+  - **New Category: Multi-Processing Parameters**:  
+    - These parameters can now be saved alongside your settings for improved flexibility.  
+    - **`ParallelProcessCount`**: Defines the number of processes to run in parallel. Each process manages a "batch size" of images at a time. Adjust this based on your CPU cores to maximize efficiency.  
+    - **`BatchSize`**: Specifies the number of frames handled simultaneously in each process. Higher values increase memory usage.  
+    - **Tip**: The total images processed at once = `ParallelProcessCount × BatchSize`. Optimize these settings based on your system's capabilities for the best results.
+
+- **User Experience Improvements**:  
+  - Refined warning, success, and info messages for a clearer and more user-friendly experience.
+
 
 ## Features
 
@@ -22,7 +33,7 @@
 2. Go to **Edit > Plugins**.
 3. In the **Installed** tab, locate and enable the **MH Face Depth Frame Mancer** plugin.   
    - For full functionality, it’s recommended to also enable the **Epic Games MetaHuman Plugin**.
-        ![Extract Frames](images/11.png)
+        ![Extract Frames](images/2025.1.7/11.png)
 
 4. **Restart Unreal Engine if prompted.**
 
@@ -67,7 +78,7 @@
    You’ll be prompted to choose whether to extract audio. For calibration or identity videos, audio is often unnecessary.
 
    ![Extract Frames](images/c.png)
-   ![Extract Frames](images/d.png)
+   ![Extract Frames](images/2025.1.7/d.png)
 
    After a successful operation, you’ll see an `ImgMediaSource` asset (e.g., **IMS-YourVideo_Video**).
 
@@ -88,7 +99,7 @@
 
    - Note: If the MetaHuman Plugin is not enabled, the **Generate Capture Footage** button will be disabled. However, you can still convert video frames to depth frames.
 
-   ![Depth Frame Creation](images/g.png)
+   ![Depth Frame Creation](images/2025.1.7/g.png)
 
    
 
@@ -104,7 +115,7 @@
    When satisfied with the preview, click `Convert Images to Depth Frames`. This may take some time.
 
    ![Saved Depth Frames](images/i.png)
-   ![Saved Depth Frames](images/j.png)
+   ![Saved Depth Frames](images/2025.1.7/j.png)
 
    After processing, a new `ImgMediaSource` will appear (e.g., **IMS-YourVideo_Depth**).
 
@@ -119,7 +130,7 @@ With the Epic Games MetaHuman Plugin enabled, you can create capture data footag
 
    Once depth frames are generated, the **Video Frames Source** and **Depth Frames Source** fields in the plugin UI will be populated. If not, set them manually and click `Create Capture Data Footage`.
 
-   ![Capture Data Footage](images/m.png)
+   ![Capture Data Footage](images/2025.1.7/m.png)
 
    This will create a `CaptureDataFootage` asset alongside your frame sequence assets. You’re now ready to use it for MetaHuman identity creation or to import performance video for MetaHuman animation!
 
